@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "740108633967",
+    "project_id": "instagran-clone-d9fbe",
+    "storage_bucket": "instagran-clone-d9fbe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740108633967:android:eed7133e817c10fd020a9a",
+        "android_client_info": {
+          "package_name": "com.example.instgram_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740108633967-t53d12cgurtpbdhbi89tmtnov77a54sq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAbR5o5T6WZKj_68W9Ag--MFcOl5Z33aE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740108633967-t53d12cgurtpbdhbi89tmtnov77a54sq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "740108633967-7vadnv7q1ditkllj850gkcktlnka2jea.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.instgramClone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

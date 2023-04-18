@@ -1,10 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'resposiveScreen/mobile_view_layout.dart';
 import 'resposiveScreen/web_view_layout.dart';
 import 'resposiveScreen/resposive_layout_screen.dart';
 import 'util/colors.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // This ensures all the Widgets 
+  await Firebase.initializeApp(); // This initailsie the application with firebase (You have to add dependency of firebase in pubspec.yaml)
   runApp(const MyApp());
 }
 
@@ -15,14 +18,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Instagram Clone',
-      //NOTE:-> Here in theme field of material app we have used ThemeData.dark().copywith()
-      // copyWith copied the all fields of ThemeData.dark() with different value of scaffoldBackgroundColor as mentined in the code
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: mobileBackgroundColor
-      ),
-      home: const ResponsiveLayout(webScreenLayout: WebViewLayout(), mobileScreenLayout: MobileViewLayout())
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Instagram Clone',
+        //NOTE:-> Here in theme field of material app we have used ThemeData.dark().copywith()
+        // copyWith copied the all fields of ThemeData.dark() with different value of scaffoldBackgroundColor as mentined in the code
+        theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
+        home: const ResponsiveLayout(webScreenLayout: WebViewLayout(), mobileScreenLayout: MobileViewLayout()));
   }
 }

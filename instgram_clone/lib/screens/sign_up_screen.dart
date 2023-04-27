@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:instgram_clone/model/sign_up_auth.dart';
 import '../widgets/text_input_widget.dart';
 
 class SignUpScreenWidget extends StatefulWidget {
   const SignUpScreenWidget({super.key});
+
   @override
   State<SignUpScreenWidget> createState() => _SignUpScreenWidgetState();
 }
 
 class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
+  final TextEditingController _biocontroller = TextEditingController();
   final TextEditingController _enamilController = TextEditingController();
   final TextEditingController _passWordcontroller = TextEditingController();
-  final TextEditingController _biocontroller = TextEditingController();
   final TextEditingController _userNamecontroller = TextEditingController();
 
   @override
@@ -44,8 +46,8 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                 backgroundImage: NetworkImage('https://images.unsplash.com/photo-1682232860597-9e16a4972602?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'),
               ),
               Positioned(
-                bottom: -10,
-                left: 80,
+                  bottom: -10,
+                  left: 80,
                   child: IconButton(
                       onPressed: () {},
                       icon: const Icon(
@@ -90,7 +92,11 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
 
           // Button for Login
           InkWell(
-            onTap: () {},
+            onTap: () async {
+              print("SignUp tapped");
+              String res = await SignUpAuth().signUpuser(email: _enamilController.text, password: _passWordcontroller.text, username: _userNamecontroller.text, bio: _biocontroller.text);
+              print(res);
+            },
             child: Container(
               decoration: ShapeDecoration(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)), color: Colors.blue),
               width: double.infinity,

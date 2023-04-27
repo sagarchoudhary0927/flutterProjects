@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instgram_clone/model/sign_up_auth.dart';
+import 'package:instgram_clone/util/colors.dart';
 import 'package:instgram_clone/util/util.dart';
 import '../widgets/text_input_widget.dart';
 
@@ -15,9 +18,10 @@ class SignUpScreenWidget extends StatefulWidget {
 class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
   final TextEditingController _biocontroller = TextEditingController();
   final TextEditingController _enamilController = TextEditingController();
-  Uint8List? _image;
   final TextEditingController _passWordcontroller = TextEditingController();
   final TextEditingController _userNamecontroller = TextEditingController();
+  Uint8List? _image;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -29,11 +33,30 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
     _userNamecontroller.dispose();
   }
 
+  // This function pikcs an Image From galleyr for profile pic
   void selectImage() async {
     Uint8List img = await Util.pickImage(ImageSource.gallery);
     setState(() {
       _image = img;
     });
+  }
+
+  //Thjis function helps user to sign up
+  void signUpuser() async {
+    if (_image == null) {
+      Util.showSnackBar("Please Select An Image", context);
+      return;
+    }
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await SignUpAuth().signUpuser(email: _enamilController.text, password: _passWordcontroller.text, username: _userNamecontroller.text, bio: _biocontroller.text, profilePic: _image!);
+    setState(() {
+      _isLoading = false;
+    });
+    if (res != "success") {
+      Util.showSnackBar(res, context);
+    } else {}
   }
 
   @override
@@ -110,16 +133,20 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
 
           // Button for Login
           InkWell(
-            onTap: () async {
-              String res = await SignUpAuth().signUpuser(email: _enamilController.text, password: _passWordcontroller.text, username: _userNamecontroller.text, bio: _biocontroller.text);
-            },
-            child: Container(
-              decoration: ShapeDecoration(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)), color: Colors.blue),
-              width: double.infinity,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: const Text('Sign Up'),
-            ),
+            onTap: signUpuser,
+            child: _isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: primaryColor,
+                    ),
+                  )
+                : Container(
+                    decoration: ShapeDecoration(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)), color: Colors.blue),
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: const Text('Sign Up'),
+                  ),
           ),
           const SizedBox(height: 12),
 

@@ -11,4 +11,10 @@ class Util {
     }
     print("No Image selected");
   }
+
+  static showSnackBar(String content, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(content)),
+    );
+  }
 }

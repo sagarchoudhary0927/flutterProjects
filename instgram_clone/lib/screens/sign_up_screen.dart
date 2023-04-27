@@ -43,6 +43,7 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
 
   //Thjis function helps user to sign up
   void signUpuser() async {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     if (_image == null) {
       Util.showSnackBar("Please Select An Image", context);
       return;
@@ -56,7 +57,9 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
     });
     if (res != "success") {
       Util.showSnackBar(res, context);
-    } else {}
+    } else {
+      Util.showSnackBar("Signed Up Successfully", context);
+    }
   }
 
   @override

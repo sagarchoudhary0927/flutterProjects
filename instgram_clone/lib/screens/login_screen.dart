@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instgram_clone/util/colors.dart';
+import 'package:instgram_clone/util/util.dart';
 
+import '../model/sign_up_auth.dart';
 import '../widgets/text_input_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _enamilController = TextEditingController();
   final TextEditingController _passWordcontroller = TextEditingController();
+  bool _isSigningIn = false;
 
   @override
   void dispose() {
@@ -19,6 +23,22 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _enamilController.dispose();
     _passWordcontroller.dispose();
+  }
+
+  void loginUser() async {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    setState(() {
+      _isSigningIn = true;
+    });
+    String res = await SignUpAuth().loginUser(email: _enamilController.text, password: _passWordcontroller.text);
+    setState(() {
+      _isSigningIn = false;
+    });
+    if (res != "success") {
+      Util.showSnackBar(res, context);
+    } else {
+       Util.showSnackBar("You have logged In!", context);
+    }
   }
 
   @override
@@ -58,8 +78,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
           // Button for Login
           InkWell(
-            onTap: () {},
-            child: Container(
+            onTap: loginUser,
+            child: _isSigningIn ? const Center(child: CircularProgressIndicator(
+              color: primaryColor,
+            ),)
+            : Container(
               decoration: ShapeDecoration(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)), color: Colors.blue),
               width: double.infinity,
               alignment: Alignment.center,

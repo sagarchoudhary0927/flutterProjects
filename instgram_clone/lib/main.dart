@@ -26,6 +26,6 @@ class MyApp extends StatelessWidget {
         // copyWith copied the all fields of ThemeData.dark() with different value of scaffoldBackgroundColor as mentined in the code
         theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
         // home: const ResponsiveLayout(webScreenLayout: WebViewLayout(), mobileScreenLayout: MobileViewLayout()));
-        home: const SignUpScreenWidget());
+        home: const LoginScreen());
   }
 }

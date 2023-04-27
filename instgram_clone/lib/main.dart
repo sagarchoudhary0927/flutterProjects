@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:instgram_clone/screens/sign_up_screen.dart';
 import '../screens/login_screen.dart';
 import 'resposiveScreen/mobile_view_layout.dart';
 import 'resposiveScreen/web_view_layout.dart';
@@ -25,6 +26,6 @@ class MyApp extends StatelessWidget {
         // copyWith copied the all fields of ThemeData.dark() with different value of scaffoldBackgroundColor as mentined in the code
         theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
         // home: const ResponsiveLayout(webScreenLayout: WebViewLayout(), mobileScreenLayout: MobileViewLayout()));
-        home: const LoginScreen());
+        home: const SignUpScreenWidget());
   }
 }
